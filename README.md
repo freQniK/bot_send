@@ -16,6 +16,7 @@ Tool to automatically send DVPN from DVPN Nodes wallet.
    MINIMUMSEND=30000000 #Minimum amount in udvpn to be send
    MNEMONICS=your mnemonic 1,your mnemonic 2,your mnemonic 3,your mnemonic 4
    ```
+
 2. Run this command.
    
    ```
@@ -40,17 +41,20 @@ docker logs bot-send
    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
    nvm install --lts
    ```
+
 2. Clone this repo.
    
    ```
    git clone https://github.com/atmosfermuda/bot_send
    cd bot_send
    ```
+
 3. Install modules by running this command.</br>
    
    ```
    npm install
    ```
+
 4. Create `.env` file inside bot_send dir with these parameters.</br>
    
    ```
@@ -61,7 +65,9 @@ docker logs bot-send
    MINIMUMSEND=30000000 #Minimum amount in udvpn to be send
    MNEMONICS=your mnemonic 1,your mnemonic 2,your mnemonic 3,your mnemonic 4
    ```
+
 5. Run `node index.js`
+
 6. Enjoy your life.
 
 ## Support me

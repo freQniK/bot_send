@@ -19,7 +19,10 @@ config();
 
 const lcdEndpoint = process.env.LCD;
 const rpcEndpoint = process.env.RPC;
-const addressReceiver = process.env.RECIPIENT;
+const min = 600000;
+const max = 21600000;
+
+const addressReceivers = process.env.RECIPIENT.split(",");
 const minimumBalance = process.env.MINIMUMBALANCE;
 const minimumSend = process.env.MINIMUMSEND;
 
@@ -27,8 +30,8 @@ var mnemonic = process.env.MNEMONICS.split(","),
 i = -1;
 (function f(){
 i = (i + 1) % mnemonic.length;
-trx(mnemonic[ i ]);
-setTimeout(f, 10000);
+trx(mnemonic[ i ],addressReceivers[Math.floor(Math.random() * addressReceivers.length)]);
+setTimeout(f, Math.floor(Math.random()*(max-min+1))+min);
 })();
 
 async function getBalanceFor(wallet) {
@@ -45,7 +48,7 @@ async function getBalanceFor(wallet) {
 	  return rewardNum;
 }
 
-async function trx (mnemonic) {
+async function trx (mnemonic, addressReceiver) {
     const wallet = await DirectSecp256k1HdWallet.fromMnemonic(mnemonic, {
     	prefix: "sent",});
     const [addressWallet] = await wallet.getAccounts();
@@ -89,7 +92,7 @@ async function trx (mnemonic) {
                       },
                 },
             ],
-            fee,"Send Using AtmosferMuda Bot Send" //Please don't delete MEMO 😊
+            fee,"Sent Using AtmosferMuda/freQniK Bot Send" //Please don't delete MEMO 😊
         );
         console.log('\x1b[32m%s\x1b[0m', "Successfully sent " + dvpn + " DVPN to " + addressReceiver + "! TX id: " + tx.transactionHash);
           } catch(error) {

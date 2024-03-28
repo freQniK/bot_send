@@ -19,19 +19,22 @@ config();
 
 const lcdEndpoint = process.env.LCD;
 const rpcEndpoint = process.env.RPC;
-const min = 600000;
+const min = 300000;
 const max = 21600000;
 
 const addressReceivers = process.env.RECIPIENT.split(",");
 const minimumBalance = process.env.MINIMUMBALANCE;
 const minimumSend = process.env.MINIMUMSEND;
 
-var mnemonic = process.env.MNEMONICS.split(","), 
-i = -1;
+var mnemonic = process.env.MNEMONICS.split(",");
+//i = -1;
 (function f(){
-i = (i + 1) % mnemonic.length;
-trx(mnemonic[ i ],addressReceivers[Math.floor(Math.random() * addressReceivers.length)]);
-setTimeout(f, Math.floor(Math.random()*(max-min+1))+min);
+//i = (i + 1) % mnemonic.length;
+trx(mnemonic[Math.floor(Math.random()*mnemonic.length)],addressReceivers[Math.floor(Math.random() * addressReceivers.length)]);
+const wait_time = Math.floor(Math.random()*(max-min+1))+min;
+const wait_time_minutes = Math.floor(wait_time / 60000);
+console.log("Waiting " + wait_time_minutes + "m...");
+setTimeout(f, wait_time);
 })();
 
 async function getBalanceFor(wallet) {
@@ -92,7 +95,7 @@ async function trx (mnemonic, addressReceiver) {
                       },
                 },
             ],
-            fee,"Sent Using AtmosferMuda/freQniK Bot Send" //Please don't delete MEMO 😊
+            fee,
         );
         console.log('\x1b[32m%s\x1b[0m', "Successfully sent " + dvpn + " DVPN to " + addressReceiver + "! TX id: " + tx.transactionHash);
           } catch(error) {

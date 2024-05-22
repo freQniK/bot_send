@@ -65,10 +65,10 @@ async function trx (mnemonic, addressReceiver) {
 		amount: [
 			{
 				denom: "udvpn",
-				amount: "9793",
+				amount: "314159",
 			},
 		],
-		gas: "97922",
+		gas: "314159",
 	  };
     console.log("Checking wallet", addressWallet.address.yellow);
     let balance = await getBalanceFor(addressWallet.address);
